@@ -33,7 +33,7 @@ Add the following `<script>` to the `<head>` of your document **before** includi
 
 ```html
 <script type="module">
-    import Fern from 'https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-tooltip@0.x.x/dist/module.esm.js'
+    import Fern from 'https://cdn.jsdelivr.net/npm/@ryangjchandler/fern@0.x.x/dist/module.esm.js'
 
     document.addEventListener('alpine:initializing', () => {
         window.Alpine.plugin(Fern)
