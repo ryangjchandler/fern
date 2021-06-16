@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module">
+        import Fern from '/dist/module.esm.js'
+
+        document.addEventListener('alpine:initializing', () => {
+            Alpine.plugin(Fern)
+
+            Alpine.persistedStore('counter', {
+                count: 0,
+                init() {
+                    console.log('great')
+                }
+            })
+        })
+    </script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>Fern</title>
+</head>
+<body>
+    <div x-data>
+        <p x-text="$store.counter.count"></p>
+        <button @click="$store.counter.count++">Inc</button>
+    </div>
+</body>
+</html>
