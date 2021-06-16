@@ -12,6 +12,7 @@
 
             Alpine.persistedStore('counter', {
                 count: 0,
+                message: 'Count is something',
                 init() {
                     console.log('great')
                 }
@@ -24,6 +25,7 @@
 <body>
     <div x-data>
         <p x-text="$store.counter.count"></p>
+        <p x-text="$store.counter.message"></p>
         <button @click="$store.counter.count++">Inc</button>
     </div>
 </body>

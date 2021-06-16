@@ -20,13 +20,14 @@ function src_default(Alpine) {
   Alpine.persistedStore = function(name, value) {
     let stored = localStorage.getItem(`__fern_${name}`);
     if (![null, void 0].includes(stored)) {
-      const methods = Object.entries(value).reduce((acc, [key, value2]) => {
-        if (typeof value2 !== "function")
+      const storedValue = JSON.parse(stored);
+      const diff = Object.entries(value).reduce((acc, [key, value2]) => {
+        if (storedValue.hasOwnProperty(key))
           return acc;
         acc[key] = value2;
         return acc;
       }, {});
-      value = Object.assign(JSON.parse(stored), methods);
+      value = Object.assign(storedValue, diff);
     }
     Alpine.store(name, value);
     window.__ferns[name] = Alpine.effect(() => {

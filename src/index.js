@@ -9,13 +9,15 @@ export default function (Alpine) {
         let stored = localStorage.getItem(`__fern_${name}`)
 
         if (! [null, undefined].includes(stored)) {
-            const methods = Object.entries(value).reduce((acc, [key, value]) => {
-                if (typeof value !== 'function') return acc
+            const storedValue = JSON.parse(stored)
+
+            const diff = Object.entries(value).reduce((acc, [key, value]) => {
+                if (storedValue.hasOwnProperty(key)) return acc
                 acc[key] = value
                 return acc
             }, {})
 
-            value = Object.assign(JSON.parse(stored), methods)
+            value = Object.assign(storedValue, diff)
         }
 
         Alpine.store(name, value)
