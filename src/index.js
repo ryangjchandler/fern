@@ -5,8 +5,9 @@ export default function (Alpine) {
 
     window.__ferns = {}
 
-    Alpine.persistedStore = function (name, value) {
-        let stored = localStorage.getItem(`__fern_${name}`)
+    Alpine.persistedStore = function (name, value, type = 1) {
+        let storage = type ? localStorage : sessionStorage
+        let stored = storage.getItem(`__fern_${name}`)
 
         if (! [null, undefined].includes(stored)) {
             const storedValue = JSON.parse(stored)
@@ -27,7 +28,7 @@ export default function (Alpine) {
                 Alpine.store(name)
             )
 
-            localStorage.setItem(`__fern_${name}`, json)
+            storage.setItem(`__fern_${name}`, json)
         })
     }
 }
