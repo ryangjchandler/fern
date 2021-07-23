@@ -5,7 +5,7 @@ export default function (Alpine) {
 
     window.__ferns = {}
 
-    Alpine.persistedStore = function (name, value, type = 1) {
+    Alpine.persistedStore = function (name, value, storage = window.localStorage) {
         let storage = type ? localStorage : sessionStorage
         let stored = storage.getItem(`__fern_${name}`)
 
