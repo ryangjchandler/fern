@@ -62,7 +62,7 @@ Creating a `persistedStore` will register a normal store with Alpine and keep tr
 </div>
 ```
 
-To use `sessionStorage`, or another custom storage that uses the same syntax, in place of `localStorage`, simply pass an optional third argument containing the storage object when creating the store.
+To use `sessionStorage`, or another custom storage that has an identical API, simply pass an optional third argument containing the storage object when creating the store.
 
 ```js
 Alpine.persistedStore('counterLocal',0) //will save to localStorage
