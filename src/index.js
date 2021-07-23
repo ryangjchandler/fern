@@ -1,14 +1,14 @@
 export default function (Alpine) {
     if (Alpine.hasOwnProperty('persistedStored') && typeof Alpine.persistedStore === 'function') {
-        return;
+        return
     }
 
     window.__ferns = {}
 
-    Alpine.persistedStore = function (name, value) {
-        let stored = localStorage.getItem(`__fern_${name}`)
+    Alpine.persistedStore = function (name, value, storage = window.localStorage) {
+        const stored = storage.getItem(`__fern_${name}`)
 
-        if (! [null, undefined].includes(stored)) {
+        if (![null, undefined].includes(stored)) {
             const storedValue = JSON.parse(stored)
 
             const diff = Object.entries(value).reduce((acc, [key, value]) => {
@@ -24,10 +24,10 @@ export default function (Alpine) {
 
         window.__ferns[name] = Alpine.effect(() => {
             const json = JSON.stringify(
-                Alpine.store(name)
+                Alpine.store(name),
             )
 
-            localStorage.setItem(`__fern_${name}`, json)
+            storage.setItem(`__fern_${name}`, json)
         })
     }
 }
