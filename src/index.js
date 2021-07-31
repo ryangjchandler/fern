@@ -11,13 +11,16 @@ export default function (Alpine) {
         if (![null, undefined].includes(stored)) {
             const storedValue = JSON.parse(stored)
 
-            const diff = Object.entries(value).reduce((acc, [key, value]) => {
-                if (storedValue.hasOwnProperty(key)) return acc
-                acc[key] = value
+            if (typeof storedValue == 'boolean') value = storedValue
+            
+            const diff = Object.entries(storedValue).reduce((acc, [key, val]) => {
+                if (!storedValue.hasOwnProperty(key) || Object.getOwnPropertyDescriptor(value, key).get) return acc
+                acc[key] = val
                 return acc
             }, {})
 
-            value = Object.assign(storedValue, diff)
+            value = Object.assign(value, diff)
+
         }
 
         Alpine.store(name, value)
