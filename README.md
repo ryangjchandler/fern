@@ -62,6 +62,13 @@ Creating a `persistedStore` will register a normal store with Alpine and keep tr
 </div>
 ```
 
+To use `sessionStorage`, or another custom storage that has an identical API, simply pass an optional third argument containing the storage object when creating the store.
+
+```js
+Alpine.persistedStore('counterLocal',0) //will save to localStorage
+Alpine.persistedStore('counterSession',0,window.sessionStorage) //will save to sessionStorage
+```
+
 If you're using the `<script type="module">` installation method, be sure to make your `persistedStore` calls after registering Fern.
 
 ```js
